@@ -4,8 +4,8 @@ window.onload = function(){
   var canvas = document.getElementById('main');
   var context = canvas.getContext('2d');
 
-  var x = 0;
-  var y = 0;
+  var x = 300;
+  var y = 175;
 
     context.beginPath();
     context.moveTo(x, y);
@@ -15,18 +15,13 @@ window.onload = function(){
     context.stroke();
   }
 
-  canvas.onclick = function(event){
-    console.log('clicked', event);
-    clickPic(event);
-  }
-
   var left = document.getElementById('left');
   var right = document.getElementById('right');
   var up = document.getElementById('up');
   var down = document.getElementById('down');
 
   left.onclick = function(){
-    x += 3;
+    x -= 3;
     draw(x, y);
   }
 
@@ -43,6 +38,28 @@ window.onload = function(){
   down.onclick = function(){
     y +=3;
     draw(x, y);
+  }
+
+  document.onkeydown = function(event){
+    console.log(event.keyIdentifier.toLowerCase());
+    switch(event.keyIdentifier.toLowerCase()){
+      case 'left':
+        x -= 3;
+        draw(x, y);
+        break;
+      case 'right':
+        x += 3;
+        draw(x, y);
+        break;
+      case 'up':
+        y -= 3;
+        draw(x, y);
+        break;
+      case 'down':
+        y +=3;
+        draw(x, y);
+        break;
+    }
   }
 
 };
