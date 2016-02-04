@@ -3,16 +3,23 @@ window.onload = function(){
 
   var canvas = document.getElementById('main');
   var context = canvas.getContext('2d');
+  var coords = JSON.parse( localStorage.getItem('lastCoords') ) || [];
 
-  var x = 300;
-  var y = 175;
+  var x = coords[0] || 300;
+  var y = coords[1] || 175;
 
-    context.beginPath();
-    context.moveTo(x, y);
+  var storeCoords = function(){ 
+    coords = [x, y]; 
+    localStorage.setItem('lastCoords', JSON.stringify(coords)); 
+  }
+
+  context.beginPath();
+  context.moveTo(x, y);
 
   var draw = function(x, y){
     context.lineTo(x, y);
     context.stroke();
+    storeCoords();
   }
 
   var left = document.getElementById('left');
@@ -61,7 +68,6 @@ window.onload = function(){
         break;
     }
   }
-
 };
 
 
